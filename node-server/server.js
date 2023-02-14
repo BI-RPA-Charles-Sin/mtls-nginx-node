@@ -42,6 +42,9 @@ function verify_certificate(request, response) {
   console.log("request.socket.getPeerCertificate() value : ");
   console.log(request.socket.getPeerCertificate());
 
+  console.log("request.client value : ");
+  console.log(request.client);
+
   if (request.client.authorized) {
     return response.send(`Hello ${cert.subject.CN}, your certificate was issued by ${cert.issuer.CN}!`);
   }

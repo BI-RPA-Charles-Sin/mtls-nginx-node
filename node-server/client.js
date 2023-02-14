@@ -6,7 +6,7 @@ const getRequestWithCertificate = async () => {
   try {
     const cert = fs.readFileSync("certs/client.crt");
     const key = fs.readFileSync("certs/client.key");
-    const hostName = "192.168.94.17:3000";
+    const hostName = "192.168.94.17";
     // const hostName = "localhost:3000";
     const httpsAgent = new https.Agent({
       cert,
