@@ -27,12 +27,22 @@ app.get("/", (req, res) => {
   const cert = decodeURIComponent(sslCert);
   const forgeCert = forge.pki.certificateFromPem(cert);
 
-  console.log(forgeCert);
+  console.log("forgeCert.generateSubjectKeyIdentifier() : ");
+  console.log(forgeCert.generateSubjectKeyIdentifier());
+  // Unique
+  console.log("ssl_curves : unique");
+  console.log("ssl_curves : ");
   console.log(req.header("ssl_curves"));
+  console.log("ssl_cipher : ");
   console.log(req.header("ssl_cipher"));
+  console.log("ssl_ciphers : ");
   console.log(req.header("ssl_ciphers"));
+  console.log("ssl_server_name : ");
   console.log(req.header("ssl_server_name"));
+  console.log("ssl_client_fingerprint : ");
   console.log(req.header("ssl_client_fingerprint"));
+  // Change every time
+  console.log("ssl_session_id : ");
   console.log(req.header("ssl_session_id"));
 
   res.status(200).json(`Hello ${req.header("ssl_client")}, your certificate was issued by ${req.header("SSL_Client_Issuer")}!`);
@@ -44,13 +54,6 @@ https.createServer(options, app).listen(PORT, () => {
 
 function verify_certificate(request, response) {
   const cert = request.socket.getPeerCertificate();
-
-  console.log(request.header("ssl_curves"));
-  console.log(request.header("ssl_cipher"));
-  console.log(request.header("ssl_ciphers"));
-  console.log(request.header("ssl_server_name"));
-  console.log(request.header("ssl_client_fingerprint"));
-  console.log(request.header("ssl_session_id"));
 
   console.log("request.client value : ");
   // console.log(request.client);
