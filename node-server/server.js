@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const forge = require("node-forge");
 
-const port = 3000;
+const PORT = 3000;
 
 const options = {
   ca: fs.readFileSync(path.resolve(__dirname, "./certs/ca.crt")),
@@ -32,8 +32,8 @@ app.get("/", (req, res) => {
   res.status(200).json(`Hello ${req.header("ssl_client")}, your certificate was issued by ${req.header("SSL_Client_Issuer")}!`);
 });
 
-https.createServer(options, app).listen(port, () => {
-  console.log(`.. server up and running and listening on ${port} ..`);
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`.. server up and running and listening on ${PORT} ..`);
 });
 
 function verify_certificate(request, response) {
