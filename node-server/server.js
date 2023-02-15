@@ -32,17 +32,42 @@ app.get("/", (req, res) => {
   // Unique
   console.log("ssl_curves : unique");
   console.log("ssl_curves : ");
-  console.log(req.header("ssl_curves"));
-  console.log("ssl_cipher : ");
-  console.log(req.header("ssl_cipher"));
-  console.log("ssl_ciphers : ");
-  console.log(req.header("ssl_ciphers"));
-  console.log("ssl_server_name : ");
-  console.log(req.header("ssl_server_name"));
-  console.log("ssl_client_fingerprint : ");
-  console.log(req.header("ssl_client_fingerprint"));
   // Change every time
   console.log("ssl_session_id : ");
+  console.log(req.header("ssl_session_id"));
+
+  // CUSTOM PRINT OUT WHAT IS THAT.
+  console.log("X-Forwarded-For");
+  console.log(req.header("X-Forwarded-For"));
+  console.log("X-Forwarded-Proto");
+  console.log(req.header("X-Forwarded-Proto"));
+  console.log("X-HTTPS-Protocol");
+  console.log(req.header("X-HTTPS-Protocol"));
+  console.log("X-SSL-CERT");
+  console.log(req.header("X-SSL-CERT"));
+  console.log("X-SSL-FP");
+  console.log(req.header("X-SSL-FP"));
+  console.log("ssl_protocol");
+  console.log(req.header("ssl_protocol"));
+  console.log("X-User-Agent");
+  console.log(req.header("X-User-Agent"));
+  console.log("X-FP");
+  console.log(req.header("X-FP"));
+  console.log("X-FP-Hash");
+  console.log(req.header("X-FP-Hash"));
+  console.log("X-SSL-Greased");
+  console.log(req.header("X-SSL-Greased"));
+  console.log("ssl_curves");
+  console.log(req.header("ssl_curves"));
+  console.log("ssl_cipher");
+  console.log(req.header("ssl_cipher"));
+  console.log("ssl_ciphers");
+  console.log(req.header("ssl_ciphers"));
+  console.log("ssl_server_name");
+  console.log(req.header("ssl_server_name"));
+  console.log("ssl_client_fingerprint");
+  console.log(req.header("ssl_client_fingerprint"));
+  console.log("ssl_session_id");
   console.log(req.header("ssl_session_id"));
 
   res.status(200).json(`Hello ${req.header("ssl_client")}, your certificate was issued by ${req.header("SSL_Client_Issuer")}!`);
@@ -60,6 +85,40 @@ function verify_certificate(request, response) {
 
   console.log("request.server value : ");
   // console.log(request.server);
+
+  // CUSTOM PRINT OUT WHAT IS THAT.
+  console.log("X-Forwarded-For");
+  console.log(req.header("X-Forwarded-For"));
+  console.log("X-Forwarded-Proto");
+  console.log(req.header("X-Forwarded-Proto"));
+  console.log("X-HTTPS-Protocol");
+  console.log(req.header("X-HTTPS-Protocol"));
+  console.log("X-SSL-CERT");
+  console.log(req.header("X-SSL-CERT"));
+  console.log("X-SSL-FP");
+  console.log(req.header("X-SSL-FP"));
+  console.log("ssl_protocol");
+  console.log(req.header("ssl_protocol"));
+  console.log("X-User-Agent");
+  console.log(req.header("X-User-Agent"));
+  console.log("X-FP");
+  console.log(req.header("X-FP"));
+  console.log("X-FP-Hash");
+  console.log(req.header("X-FP-Hash"));
+  console.log("X-SSL-Greased");
+  console.log(req.header("X-SSL-Greased"));
+  console.log("ssl_curves");
+  console.log(req.header("ssl_curves"));
+  console.log("ssl_cipher");
+  console.log(req.header("ssl_cipher"));
+  console.log("ssl_ciphers");
+  console.log(req.header("ssl_ciphers"));
+  console.log("ssl_server_name");
+  console.log(req.header("ssl_server_name"));
+  console.log("ssl_client_fingerprint");
+  console.log(req.header("ssl_client_fingerprint"));
+  console.log("ssl_session_id");
+  console.log(req.header("ssl_session_id"));
 
   if (request.client.authorized) {
     return response.send(`Hello ${cert.subject.CN}, your certificate was issued by ${cert.issuer.CN}!`);
