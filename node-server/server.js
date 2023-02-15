@@ -37,20 +37,20 @@ app.get("/", (req, res) => {
   // Change every time
   console.log("ssl_session_id : ");
   console.log(req.header("ssl_session_id"));
+  console.log("X-HTTPS-Protocol");
+  console.log(req.header("X-HTTPS-Protocol"));
+  console.log("ssl_cipher");
+  console.log(req.header("ssl_cipher"));
+  console.log("ssl_ciphers");
+  console.log(req.header("ssl_ciphers").split(":"));
 
   // CUSTOM PRINT OUT WHAT IS THAT.
   // console.log("X-Forwarded-For");
   // console.log(req.header("X-Forwarded-For"));
   // console.log("X-Forwarded-Proto");
   // console.log(req.header("X-Forwarded-Proto"));
-  // console.log("X-HTTPS-Protocol");
-  // console.log(req.header("X-HTTPS-Protocol"));
   // console.log("X-SSL-FP");
   // console.log(req.header("X-SSL-FP"));
-  // console.log("ssl_cipher");
-  // console.log(req.header("ssl_cipher"));
-  // console.log("ssl_ciphers");
-  // console.log(req.header("ssl_ciphers"));
 
   res.status(200).json(`Hello ${req.header("ssl_client")}, your certificate was issued by ${req.header("SSL_Client_Issuer")}!`);
 });
