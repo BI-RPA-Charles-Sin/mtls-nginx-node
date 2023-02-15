@@ -6,7 +6,7 @@ const getRequestWithCertificate = async () => {
   try {
     const cert = fs.readFileSync("certs/client.crt");
     const key = fs.readFileSync("certs/client.key");
-    const hostName = "192.168.94.17";
+    const hostName = "192.168.94.17:3000";
     // const hostName = "localhost:3000";
     const httpsAgent = new https.Agent({
       cert,
@@ -37,7 +37,7 @@ const getRequestWithCertificate = async () => {
         // the request was made and server responsed tiwh a status code
         // console.log(error.response.data);
         // console.log(error.response.status);
-        // console.log(error.response.headers);
+        // console.log(error.response.headers); 
       }
     }
   }
