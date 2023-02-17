@@ -3,6 +3,7 @@ const https = require("https");
 const fs = require("fs");
 const path = require("path");
 const forge = require("node-forge");
+const md5 = require("md5");
 
 const PORT = 3000;
 
@@ -27,24 +28,52 @@ app.get("/", (req, res) => {
   const cert = decodeURIComponent(sslCert);
   const forgeCert = forge.pki.certificateFromPem(cert);
 
-  console.log(JSON.stringify(forgeCert));
+  // console.log(JSON.stringify(forgeCert));
+
+  let ellipticCurvesArr = req.header("ssl_curves").split(":");
+  let ciphersArr = req.header("ssl_ciphers").split(":");
+  let tls_version = req.header("X-HTTPS-Protocol");
+
+  let ellipticCurves = "";
+  let ciphers = "";
+
+  ellipticCurvesArr.forEach((item) => {
+    ellipticCurves += `${item}-`;
+  });
+
+  ciphersArr.forEach((item) => {
+    ciphers += `${item}-`;
+  });
+
+  ellipticCurves = ellipticCurves.slice(0, -1) + "";
+  ciphers = ciphers.slice(0, -1) + "";
+
+  const ja3_str = `${tls_version},${ellipticCurves},${ciphers}`;
+  const ja3hash = md5(ja3_str);
 
   // Unique
-  console.log("ssl_curves : unique");
-  console.log(req.header("ssl_curves"));
+  // console.log("ssl_curves : unique");
+  // console.log(req.header("ssl_curves"));
+  // console.log("X-Real-IP");
+  // console.log(req.header("X-Real-IP"));
   // Change every time
-  console.log("ssl_session_id : dynamic");
-  console.log(req.header("ssl_session_id"));
-  console.log("X-Real-IP");
-  console.log(req.header("X-Real-IP"));
-  console.log("ssl_cipher");
-  console.log(req.header("ssl_cipher"));
-  console.log("ssl_ciphers");
-  console.log(req.header("ssl_ciphers").split(":"));
-  console.log("request_id : dynamic");
-  console.log(req.header("request_id"));
+  // console.log("ssl_session_id : dynamic");
+  // console.log(req.header("ssl_session_id"));
+  // console.log("ssl_cipher");
+  // console.log(req.header("ssl_cipher"));
+  // console.log("ssl_ciphers");
+  // console.log(req.header("ssl_ciphers").split(":"));
+  // console.log("request_id : dynamic");
+  // console.log(req.header("request_id"));
 
-  res.status(200).json(`Hello ${req.header("ssl_client")}, your certificate was issued by ${req.header("SSL_Client_Issuer")}!`);
+  res.status(200).json({
+    msg: `Hello ${req.header("ssl_client")}, your certificate was issued by ${req.header("SSL_Client_Issuer")}! `,
+    tls_version,
+    ellipticCurves,
+    ciphers,
+    ja3_str: `${ja3_str}`,
+    ja3_hash: `${ja3hash}`,
+  });
 });
 
 https.createServer(options, app).listen(PORT, () => {
