@@ -17,7 +17,7 @@ const getRequestWithCertificate = async () => {
     const response = await axios.get(`https://${hostName}/`, {
       httpsAgent,
     });
-    // console.log(response.data);
+    console.log(response.data);
     console.log("succeccfull");
   } catch (e) {
     const error = e;
