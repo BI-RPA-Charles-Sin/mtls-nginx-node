@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios.js";
 import https from "https";
 import fs from "fs";
 
