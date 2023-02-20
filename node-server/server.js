@@ -18,6 +18,10 @@ const options = {
 const app = express();
 
 app.get("/", (req, res) => {
+  res.send("Home Page.");
+});
+
+app.get("/api/cert", (req, res) => {
   if (!isEmpty(req.socket.getPeerCertificate())) {
     return verify_certificate(req, res);
   }
