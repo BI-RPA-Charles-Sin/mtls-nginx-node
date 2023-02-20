@@ -1,6 +1,6 @@
-const axios = require("axios");
-const https = require("https");
-const fs = require("fs");
+import axios from "axios";
+import https from "https";
+import fs from "fs";
 
 const getRequestWithCertificate = async () => {
   try {
