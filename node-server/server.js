@@ -18,7 +18,7 @@ const options = {
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("Home Page.");
+  res.sendFile("./index.html");
 });
 
 app.get("/api/cert", (req, res) => {
