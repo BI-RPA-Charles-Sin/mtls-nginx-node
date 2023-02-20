@@ -18,7 +18,7 @@ const options = {
 const app = express();
 
 app.get("/", (req, res) => {
-  res.sendFile("./index.html");
+  res.sendFile("./index.html", { root: __dirname });
 });
 
 app.get("/api/cert", (req, res) => {
