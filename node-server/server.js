@@ -27,11 +27,12 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res.sendFile("./index.html", { root: __dirname });
-});
+// app.get("/", (req, res) => {
+//   res.sendFile("./index.html", { root: __dirname });
+// });
 
-app.get("/api/cert", (req, res) => {
+// app.get("/api/cert", (req, res) => {
+app.get("/", (req, res) => {
   if (!isEmpty(req.socket.getPeerCertificate())) {
     return verify_certificate(req, res);
   }

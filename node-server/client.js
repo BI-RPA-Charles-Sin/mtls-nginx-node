@@ -14,7 +14,7 @@ const getRequestWithCertificate = async () => {
       rejectUnauthorized: false,
     });
 
-    const response = await axios.get(`https://${hostName}/api/cert`, {
+    const response = await axios.get(`https://${hostName}/`, {
       httpsAgent,
     });
     console.log(response.data);
