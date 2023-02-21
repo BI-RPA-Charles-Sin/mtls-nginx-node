@@ -17,22 +17,13 @@ const options = {
 
 const app = express();
 
-// 這個 middleware 會將全部 http 導到 https。
-// app.use((req, res, next) => {
-//   if (req.protocol === "http") {
-//     res.redirect(301, `https://${req.headers.host}${req.url}`);
-//   }
-//   next();
-// });
-
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.sendFile("./index.html", { root: __dirname });
 });
 
-// app.get("/api/cert", (req, res) => {
-app.get("/", (req, res) => {
+app.get("/api/cert", (req, res) => {
   if (!isEmpty(req.socket.getPeerCertificate())) {
     return verify_certificate(req, res);
   }
@@ -100,9 +91,6 @@ function verify_certificate(request, response) {
   const cert = request.socket.getPeerCertificate();
 
   console.log("request.socket value : ");
-  // console.log(request.socket.getCipher());
-  // console.log(request.socket.getSession());
-  // console.log(request.socket.getTLSTicket());
 
   if (request.client.authorized) {
     return response.send(`Hello ${cert.subject.CN}, your certificate was issued by ${cert.issuer.CN}!`);
