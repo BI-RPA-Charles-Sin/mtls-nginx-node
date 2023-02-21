@@ -80,19 +80,15 @@ app.get("/api/cert", (req, res) => {
   // console.log("request_id : dynamic");
   // console.log(req.header("request_id"));
 
-  res.status(200).json({
-    msg: `Hello ${req.header("ssl_client")}, your certificate was issued by ${req.header("SSL_Client_Issuer")}! `,
-    tls_version,
-    ellipticCurves,
-    ciphers,
-    ja3_str: `${ja3_str}`,
-    ja3_hash: `${ja3hash}`,
-  });
-});
-
-server = require("https").createServer(app);
-server.listen(80, () => {
-  console.log(`.. server up and running and listening on 80 ..`);
+  // res.status(200).json({
+  //   msg: `Hello ${req.header("ssl_client")}, your certificate was issued by ${req.header("SSL_Client_Issuer")}! `,
+  //   tls_version,
+  //   ellipticCurves,
+  //   ciphers,
+  //   ja3_str: `${ja3_str}`,
+  //   ja3_hash: `${ja3hash}`,
+  // });
+  res.sendFile("./index.html", { root: __dirname });
 });
 
 https.createServer(options, app).listen(PORT, () => {
