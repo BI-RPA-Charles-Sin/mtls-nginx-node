@@ -5,7 +5,7 @@ const path = require("path");
 const forge = require("node-forge");
 const md5 = require("md5");
 
-const PORT = 3000;
+const PORT = 443;
 
 const options = {
   ca: fs.readFileSync(path.resolve(__dirname, "./certs/ca.crt")),
@@ -17,6 +17,7 @@ const options = {
 
 const app = express();
 
+// 這個 middleware 會將全部 http 導到 https。
 app.use((req, res, next) => {
   if (req.protocol === "http") {
     res.redirect(301, `https://${req.headers.host}${req.url}`);
