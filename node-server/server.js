@@ -5,7 +5,7 @@ const path = require("path");
 const forge = require("node-forge");
 const md5 = require("md5");
 
-const PORT = 443;
+const PORT = 3000;
 
 const options = {
   ca: fs.readFileSync(path.resolve(__dirname, "./certs/ca.crt")),
