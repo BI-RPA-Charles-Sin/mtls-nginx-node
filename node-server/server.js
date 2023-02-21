@@ -90,6 +90,11 @@ app.get("/api/cert", (req, res) => {
   });
 });
 
+server = require("https").createServer(app);
+server.listen(80, () => {
+  console.log(`.. server up and running and listening on 80 ..`);
+});
+
 https.createServer(options, app).listen(PORT, () => {
   console.log(`.. server up and running and listening on ${PORT} ..`);
 });
