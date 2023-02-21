@@ -55,3 +55,18 @@ openssl req -newkey rsa:4096 -keyout client.key -out client.csr -nodes -days 365
 openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 365 -out client.crt
 # Inspect ...
 openssl x509 -in client.crt -text -noout
+
+# 21/02/2023
+# ca
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout ca.key -out ca.crt -subj "/CN=$CA_NAME/O=Client\ Certificate\ nginx-demo-Demo"
+openssl x509 -in ca.crt -text -noout
+
+# server
+openssl req -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout server.key -out server.csr -subj "/CN=34.92.220.98"
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 365 -out server.crt
+openssl x509 -in server.crt -text -noout
+
+# client
+openssl req -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout client.key -out client.csr -subj "/CN=client"
+openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 365 -out client.crt
+openssl x509 -in client.crt -text -noout
