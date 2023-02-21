@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const forge = require("node-forge");
 const md5 = require("md5");
+const cors = require("cors");
 
 const PORT = 3000;
 
@@ -17,6 +18,7 @@ const options = {
 
 const app = express();
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
