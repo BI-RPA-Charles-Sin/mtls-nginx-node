@@ -11,6 +11,8 @@
 
     <!-- Change to socket io  -->
     <script type="module">
+      import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
       const socket = io("https://localhost:9443", {
         cert: `-----BEGIN CERTIFICATE-----\n
               MIIC8TCCAdkCCQC3PyBehKcu+TANBgkqhkiG9w0BAQsFADAyMTAwLgYDVQQKDCdU\n
