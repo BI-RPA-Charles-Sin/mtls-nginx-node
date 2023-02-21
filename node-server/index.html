@@ -64,16 +64,16 @@
               `,
       });
 
-      socket.on("connect", () => {
-        console.log(socket.id); // "G5p5..."
-        const engine = socket.io.engine;
-        console.log(engine.transport.name);
-        console.log(socket);
-      });
+      // socket.on("connect", () => {
+      //   console.log(socket.id); // "G5p5..."
+      //   const engine = socket.io.engine;
+      //   console.log(engine.transport.name);
+      //   console.log(socket);
+      // });
 
-      socket.on("error", (error) => {
-        console.error({ error });
-      });
+      // socket.on("error", (error) => {
+      //   console.error({ error });
+      // });
     </script>
   </body>
 </html>
