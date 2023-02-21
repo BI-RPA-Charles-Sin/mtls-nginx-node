@@ -42,7 +42,7 @@ prompt                 = no
 
 [ req_distinguished_name ]
  O                      = $PROJECT_NAME
- CN                     = 192.168.111.100
+ CN                     = 34.92.220.98
 EOF
 
 cat > client_cert.conf << EOF
