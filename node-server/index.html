@@ -12,13 +12,15 @@
     <!-- <iframe src="https://34.92.220.98/api/cert"></iframe> -->
 
     <script>
-      const url = 'https://34.92.220.98/api/cert';
+      async function queryAPI() {
+        const url = "https://34.92.220.98/api/cert";
 
-      const response = await fetch(url);
+        const response = await fetch(url);
 
-      const text = await response.text();
+        const text = await response.text();
 
-      console.log(text);
+        console.log(text);
+      }
     </script>
     <!-- Change to socket io  -->
     <script type="module">
