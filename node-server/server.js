@@ -43,7 +43,8 @@ servIo.on("connection", function (socket) {
   // console.log(socket.handshake.auth);
   // console.log({ cert });
 
-  console.log(socket);
+  console.log(socket.server.httpServer);
+  console.log(socket.server.eio.clients);
 
   setInterval(function () {
     socket.emit("second", { second: new Date().getTime() });
