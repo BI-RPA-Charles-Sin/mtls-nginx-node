@@ -18,8 +18,40 @@ const options = {
 
 const app = express();
 
+const server = https.createServer(options, app);
+server.listen(PORT, () => {
+  console.log(`.. server up and running and listening on ${PORT} ..`);
+});
+
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
+
+// Socket Begin
+const io = require("socket.io")();
+
+var servIo = io.listen(server, {
+  cors: true,
+  origin: "*",
+  credentials: true,
+  forceBase64: true,
+});
+
+servIo.on("connection", function (socket) {
+  //   let cert = socket.client.request.client.authorized.getPeerCertificate();
+  let cert = socket.client.request.client.authorized;
+
+  console.log(socket.handshake.auth);
+  console.log({ cert });
+
+  const { user_id } = socket.handshake.query;
+
+  connectedUsers[user_id] = socket.id;
+
+  setInterval(function () {
+    socket.emit("second", { second: new Date().getTime() });
+  }, 1000);
+});
+// Socket End
 
 app.get("/", (req, res) => {
   res.sendFile("./index.html", { root: __dirname });
@@ -83,10 +115,6 @@ app.get("/api/cert", (req, res) => {
     ja3_hash: `${ja3hash}`,
   });
   // res.sendFile("./index.html", { root: __dirname });
-});
-
-https.createServer(options, app).listen(PORT, () => {
-  console.log(`.. server up and running and listening on ${PORT} ..`);
 });
 
 function verify_certificate(request, response) {

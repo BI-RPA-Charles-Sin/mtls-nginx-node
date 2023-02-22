@@ -9,14 +9,86 @@
   <body>
     <h1>Ja3 Fingerprint</h1>
 
-    <script>
-      fetch("/api/cert")
-        .then((response) => {
-          console.log({ response });
-        })
-        .catch((e) => {
-          console.error(e);
-        });
+    <script type="module">
+      import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
+      const socket = io("https://34.92.220.98/", {
+        secure: true,
+        withCredentials: true,
+        rejectUnauthorized: true,
+        cert: `-----BEGIN CERTIFICATE-----\n
+            MIIEfjCCA2agAwIBAgIJAMj2yiCAL7TNMA0GCSqGSIb3DQEBCwUAMIGLMQswCQYD\n
+            VQQGEwJUVzERMA8GA1UECAwIVGFpY2h1bmcxETAPBgNVBAcMCFRhaWNodW5nMQww\n
+            CgYDVQQKDANEZXYxDDAKBgNVBAsMA0RldjEVMBMGA1UEAwwMMzQuOTIuMjIwLjk4\n
+            MSMwIQYJKoZIhvcNAQkBFhRnaGNzODIxMTI4QGdtYWlsLmNvbTAeFw0yMzAyMjIw\n
+            MjAyNDlaFw0zMzAyMTkwMjAyNDlaMIGLMQswCQYDVQQGEwJUVzERMA8GA1UECAwI\n
+            VGFpY2h1bmcxETAPBgNVBAcMCFRhaWNodW5nMQwwCgYDVQQKDANEZXYxDDAKBgNV\n
+            BAsMA0RldjEVMBMGA1UEAwwMMzQuOTIuMjIwLjk4MSMwIQYJKoZIhvcNAQkBFhRn\n
+            aGNzODIxMTI4QGdtYWlsLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoC\n
+            ggEBAMc7YIBIpdIcccq+uo4875s6RKMpK6wTgHCyZkZzHJZotXAJCmL4Y0T2cEv9\n
+            2qr3/uD+/NWCr4zBjafVFa4xKqcXhqOFnch6pLToaC3fr16X0ccMUfVl169MsfV3\n
+            vWE77xQkfbpW/+FvinEkS2YKu0yM/MtJJERvFPlqmxuA7wdSlLrKNL4yCMG6hKeF\n
+            syUqE31pKpc8CAmtIYC1Ka3kD1Wf30F/c2QZhC9G1qH40C/3+62kr0q9nOSMXH/2\n
+            amxypLlpW0T5i1L56iHyQ4d0tfTEBiQswrgK964ps7aO8DjW6elRq77a6NXVnHZz\n
+            x6jCkEnUKPQ8TYfR8amsYIPqXNsCAwEAAaOB4jCB3zCBqgYDVR0jBIGiMIGfoYGR\n
+            pIGOMIGLMQswCQYDVQQGEwJUVzERMA8GA1UECAwIVGFpY2h1bmcxETAPBgNVBAcM\n
+            CFRhaWNodW5nMQwwCgYDVQQKDANEZXYxDDAKBgNVBAsMA0RldjEVMBMGA1UEAwwM\n
+            MzQuOTIuMjIwLjk4MSMwIQYJKoZIhvcNAQkBFhRnaGNzODIxMTI4QGdtYWlsLmNv\n
+            bYIJAOtkFUlPRzpmMAkGA1UdEwQCMAAwCwYDVR0PBAQDAgTwMBgGA1UdEQQRMA+C\n
+            B3Rscy5jb22HBCJc3GIwDQYJKoZIhvcNAQELBQADggEBAIIOJtbvv5vC3ei9mtBn\n
+            y2PQjXc/Oh+VLhU5n2xJ1WREsssVXmQSNLXIsTdqV2o/mA2r0fVycykqVRD8/VVP\n
+            rF4jlgmAnrPp7VU3hzmJbnI0uXCD5bHELRSTrUyvrTyD6DFZ3KNrp1JkpaQ69Lw+\n
+            8QGDY02v/QpgZgIWGav1Ud1tFyIqPVBhado/dlJIlyl6TSutEP3PJjObjzs1r/Bn\n
+            35xS0R++PhALHcGGG7UIwPRvEjvZpb50brSPu2PH0n2irXeXzVUN1QwVyC5LQpUy\n
+            1a49PMrlnTsXfAYRimEDQ9sf47f6EOwbgsh25UBwO+POdjWQ9EjG9/AXfJc/5fZt\n
+            ACY=\n
+            -----END CERTIFICATE-----\n`,
+        key: `-----BEGIN RSA PRIVATE KEY-----\n
+            Proc-Type: 4,ENCRYPTED\n
+            DEK-Info: DES-EDE3-CBC,4F5F53C425FBCABE\n\n
+
+            9wBsyHdf/jamTnDOue4JjBXT8x5WdNaiOutWx9z7Wwyq6PtLxcsVfZeercj5R5AS\n
+            ijF6OrLpAi7sVRWXzc78ac53A7jWQRqWu4P9OZc/telu+7BV2MppiewFKtkQcEj9\n
+            AnfJfkFo7D4IcrwGTXY/tCZfkdgqr54E5pUMue5cZACKdr61RDArOv/inQnOHFnf\n
+            CBKHDIhsEeBPAdceBc/emPJXZE7gmfXuKkwaCMlLwWp0H2qN++3llFlnnPDNEJwz\n
+            GJzGywdj6NG+KvPkrlaGcrOILExoMSazDOmQie5rsKVd0R1lCFUsb3Z4MWrc6yrt\n
+            JQa7JLGIVGBxgpid5RFnyh/4VbMxK1K4xCGNAldm4VZyNlOKSP4lwcFPOhgnee9H\n
+            kyyVEZH3sPXhQXquIOM6r7N48uB+STPJDIVz6iVCFwZX4R6nIrrcZC7Pv2qn8soB\n
+            s2/Fr6cCGeKspQnn+GOApSX5qH+TbgUIJgXbia+KK+1IPIPcOTHMZFi/kbFhKdv3\n
+            7s0rvpYP3DOt9J96SdWF6Ao/r8WvmRxKL9YcQLT8ZKfNmHezdxw0ApriRPyJALTB\n
+            w8ymbJGkbk9kr1oZ8ifFH1jr9nIyvGZtqGf7ya5+QKAsrE6XEX5YVi0WE1jZ6r5a\n
+            18CaUm/TspDl2Z+f0PCLW+LTzxA4LhsXb6lHKGs8tcsPfbmbhqJwBp64I2kQFutD\n
+            JtKXmVZ6PNnoH0QB5vL89rWSukGuGuEwZ7skM2Y1w3HEP+l19WD859oQF6mjTkVQ\n
+            4LpcbOFsR1YUvnaLC3ERjFVMSlMWdtVWAvXutaW9wAXI833k3UEpZY25NApOCCwJ\n
+            vUR42Qo5DZSGvHviAKulgmbX3Ade0hkwLXPyOckUDfJmPy452eWyGEkV9304HLNR\n
+            iCvbY7IT2MJ77MLkPPO+4rws2zmucXCqew4ctVEKyg8Rzptre8cOS8+GKhnG4My7\n
+            lKk62exqe2Qv/fK+92SlZ/oZnchlUqSrC0O0rkRIRcaYyvSF8ju3iqpUa1WZc2mM\n
+            chbS15k4mVhv4L27Xqx8PbhZkwT7x2ME4ZcLE8D5oKfOoG0HCQqSr3PMCSzfCiqW\n
+            vZIMjZSZFUW6X1RhvjJN7EGYCEThz3/BfvNTv0j1EWBRpjzKdnME4uMMjGx9jArB\n
+            n7X57OwNDZ4EF1JLSnOndcUFoS0C0E8gKRDlwNW8jvOwd5VfBLQZeR1rlvL/A7Hg\n
+            P63rnEcsF0BM3NJYm3N+L9MScibpFz83Fovg0bPrKHbRq+/k+z31UACH0lTc4Mio\n
+            VcbEeD285/Uy0BcOfVVcoRSzkrKqChePzt7f9n74d6R/BTdnJbOE0PPNT3p/Te+G\n
+            AOCfBt6BjEinmCWEmsn71n3/VSzTZUwtIJeEVnmWnDqtnuNbBjbAOzz5DYNbCYj9\n
+            CuqtCiLVkC/jncHMEmaveRj9tQ9TSwwJeKNe5yjCZARTcSn+QZc2fDrMS5f9aTf7\n
+            fZHXEGP0wMA96xyJmqr6HKmToN63HsPA6Tec3krqzkV2e0ddUNFRaXha1OmVLHMp\n
+            0u7uso5C9SdpFfdQoS2WxhBVkbC2uduJIGAVkvWr4H0FyYWTubNkWR4P1mCiBHa0\n
+            -----END RSA PRIVATE KEY-----\n`,
+        auth: (cb) => {
+          cb({ token: localStorage.getItem("v_id") });
+        },
+      });
+
+      socket.on("second", function (second) {
+        document.querySelector("#second").textContent = second.second;
+      });
+
+      socket.on("connect", () => {
+        console.log(socket.id); // "G5p5..."
+        const engine = socket.io.engine;
+        console.log(engine.transport.name);
+        console.log(socket);
+        console.log(socket.ack);
+      });
     </script>
 
     <!-- <script type="module">
