@@ -62,7 +62,7 @@ app.get("/api/cert", (req, res) => {
     return verify_certificate(req, res);
   }
 
-  if (req.header("ssl_client_verify") !== "SUCCESS") return res.status(403).send("Forbidden - please provide valid certificate.");
+  // if (req.header("ssl_client_verify") !== "SUCCESS") return res.status(403).send("Forbidden - please provide valid certificate.");
 
   // const sslCert = req.header("X-SSL-CERT");
   // const cert = decodeURIComponent(sslCert);
