@@ -7,7 +7,6 @@ const md5 = require("md5");
 const cors = require("cors");
 
 const PORT = 3000;
-const HOSTNAME = "34.92.220.98";
 
 const options = {
   ca: fs.readFileSync(path.resolve(__dirname, "./certs/ca.crt")),
@@ -86,7 +85,7 @@ app.get("/api/cert", (req, res) => {
   // res.sendFile("./index.html", { root: __dirname });
 });
 
-https.createServer(options, app).listen({ PORT, HOSTNAME }, () => {
+https.createServer(options, app).listen(PORT, () => {
   console.log(`.. server up and running and listening on ${PORT} ..`);
 });
 
