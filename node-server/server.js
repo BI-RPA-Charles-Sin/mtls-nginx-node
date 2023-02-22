@@ -37,14 +37,13 @@ var servIo = io.listen(server, {
 });
 
 servIo.on("connection", function (socket) {
-  //   let cert = socket.client.request.client.authorized.getPeerCertificate();
-  let cert = socket.client.request.client.authorized;
-
-  // console.log(socket.handshake.auth);
-  // console.log({ cert });
-
-  console.log(socket.server.httpServer);
-  console.log(socket.server.eio.clients);
+  // console.log(socket.server.httpServer.ALPNProtocols);
+  // console.log("/n")
+  // console.log(socket.server.httpServer.key);
+  // console.log("/n")
+  // console.log(socket.server.httpServer.cert);
+  // console.log("/n")
+  // console.log(socket.server.httpServer.ca);
 
   setInterval(function () {
     socket.emit("second", { second: new Date().getTime() });
@@ -138,3 +137,5 @@ function isEmpty(obj) {
   }
   return true;
 }
+
+// T755TcGHGTiT2UkkAAAA
