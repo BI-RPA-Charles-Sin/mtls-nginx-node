@@ -1,4 +1,5 @@
 # /certs/
+/certs/*.pem
 /certs-old/
 /custom-certs/
 /certs-21022023/
