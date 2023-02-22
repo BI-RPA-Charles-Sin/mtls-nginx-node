@@ -12,10 +12,13 @@
     <!-- <iframe src="https://34.92.220.98/api/cert"></iframe> -->
 
     <script>
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET", "https://34.92.220.98/api/cert", true);
-      xhr.withCredentials = true;
-      xhr.send(null);
+      const url = 'https://34.92.220.98/api/cert';
+
+      const response = await fetch(url);
+
+      const text = await response.text();
+
+      console.log(text);
     </script>
     <!-- Change to socket io  -->
     <script type="module">
