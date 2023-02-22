@@ -45,6 +45,8 @@ servIo.on("connection", function (socket) {
   // console.log("/n")
   // console.log(socket.server.httpServer.ca);
 
+  console.log({ socket });
+
   setInterval(function () {
     socket.emit("second", { second: new Date().getTime() });
   }, 1000);
@@ -57,8 +59,10 @@ app.get("/", (req, res) => {
 
 app.get("/api/cert", (req, res) => {
   if (!isEmpty(req.socket.getPeerCertificate())) {
+    console.log("if");
     return verify_certificate(req, res);
   }
+  console.log("outside if");
 
   // if (req.header("ssl_client_verify") !== "SUCCESS") return res.status(403).send("Forbidden - please provide valid certificate.");
 
