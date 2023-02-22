@@ -59,10 +59,8 @@ app.get("/", (req, res) => {
 
 app.get("/api/cert", (req, res) => {
   if (!isEmpty(req.socket.getPeerCertificate())) {
-    console.log("if");
     return verify_certificate(req, res);
   }
-  console.log("outside if");
 
   // if (req.header("ssl_client_verify") !== "SUCCESS") return res.status(403).send("Forbidden - please provide valid certificate.");
 
@@ -92,6 +90,10 @@ app.get("/api/cert", (req, res) => {
 
   const ja3_str = `${tls_version},${ellipticCurves},${ciphers}`;
   const ja3hash = md5(ja3_str);
+
+  console.log("if");
+  console.log(ja3_str);
+  console.log(ja3hash);
 
   // Unique
   // console.log("ssl_curves : unique");
