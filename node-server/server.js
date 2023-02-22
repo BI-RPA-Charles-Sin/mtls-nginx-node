@@ -43,10 +43,6 @@ servIo.on("connection", function (socket) {
   console.log(socket.handshake.auth);
   console.log({ cert });
 
-  const { user_id } = socket.handshake.query;
-
-  connectedUsers[user_id] = socket.id;
-
   setInterval(function () {
     socket.emit("second", { second: new Date().getTime() });
   }, 1000);
