@@ -9,9 +9,15 @@
   <body>
     <h1>Ja3 Fingerprint</h1>
 
-    <!-- <iframe src="https://34.92.220.98/api/cert"></iframe> -->
-
-    <script type="module" src="./client.js"></script>
+    <script>
+      fetch("/api/cert")
+        .then((response) => {
+          console.log({ response });
+        })
+        .cathc((e) => {
+          console.error(e);
+        });
+    </script>
 
     <!-- <script type="module">
       import axios from "axios";
