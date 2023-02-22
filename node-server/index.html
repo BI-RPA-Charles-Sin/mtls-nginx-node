@@ -9,6 +9,73 @@
   <body>
     <h1>Ja3 Fingerprint</h1>
 
+    <iframe src="https://34.92.220.98/api/cert"></iframe>
+
     <!-- Change to socket io  -->
+    <script type="module">
+      import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+
+      // const socket = io("https://34.92.220.98", {
+      //   path: "/api/cert",
+      //   cert: `-----BEGIN CERTIFICATE-----\n
+      //         MIIC8TCCAdkCCQC3PyBehKcu+TANBgkqhkiG9w0BAQsFADAyMTAwLgYDVQQKDCdU\n
+      //         TFMgUHJvamVjdCBEb2RneSBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkwHhcNMjMwMjA5\n
+      //         MDc1MjQwWhcNMjQwNjIzMDc1MjQwWjBDMScwJQYDVQQKDB5UTFMgUHJvamVjdCBE\n
+      //         ZXZpY2UgQ2VydGlmaWNhdGUxGDAWBgNVBAMMDzE5Mi4xNjguMTExLjEwMTCCASIw\n
+      //         DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMDjAjhbJEJxO6o4tV6nBEJ5O08S\n
+      //         HWUWyTwTut/dJvnLZevTdAY8lMitgrNR0qIu+BlbK1kItYa1LyW6D/fr9255u2eN\n
+      //         RuDxxBKjfZ0oy02uXCUJQYnqfrgDuGOYpt5dnJd+T+kJPIgoAOrpVKc5JruGzRtu\n
+      //         5G+ewu69bXozeIjDU/AExCwo+o+86zwHZYEHtQqR8tK2D6/uV5BPllZcmPlPJXUh\n
+      //         q5NQhxjAIiantfnBQUXFeX2Lb4BOTwQGjzdBp8rEx1LgYRO4B6quBn/7yHt+oQAH\n
+      //         ShGJR+q4ZT8ezB7rO3GsVsdJIU9CbnROKbyLO4u3ANBiwzgjVFI1wm6H7csCAwEA\n
+      //         ATANBgkqhkiG9w0BAQsFAAOCAQEAlGG820gKrDO3dxpfYfiz2iLObYa7Yjo7QWRn\n
+      //         8qR3mB2ITqHvKBH90x1SBjDgJ489OpNP3jYiJQlaXp6Rp4A1sZTCT0ijj3Yt61B8\n
+      //         su3pZcYfZuTKuBzzehPizi+I9NxcyhOBN8cID0EzvJMxkjRvxY5sw0jZWEyfdtz8\n
+      //         /DLS8ffsW9DXxrHaotp+oSpsPwTgimJfBGFUrYvimbJL5PQSphqqh+1fCvZHWHBr\n
+      //         j2BHr/58/Jo31BKuggVGUEKoxvfIyubW5AG4278XkKvznTEnBaerluFABaw8xOGl\n
+      //         s5oEkycAiYhn7STkB0hxFachZNkIF2ObcpmXqgdZcIsxTAENRw==\n
+      //         -----END CERTIFICATE-----\n
+      //         `,
+      //   key: `-----BEGIN RSA PRIVATE KEY-----\n
+      //         MIIEogIBAAKCAQEAwOMCOFskQnE7qji1XqcEQnk7TxIdZRbJPBO6390m+ctl69N0\n
+      //         BjyUyK2Cs1HSoi74GVsrWQi1hrUvJboP9+v3bnm7Z41G4PHEEqN9nSjLTa5cJQlB\n
+      //         iep+uAO4Y5im3l2cl35P6Qk8iCgA6ulUpzkmu4bNG27kb57C7r1tejN4iMNT8ATE\n
+      //         LCj6j7zrPAdlgQe1CpHy0rYPr+5XkE+WVlyY+U8ldSGrk1CHGMAiJqe1+cFBRcV5\n
+      //         fYtvgE5PBAaPN0GnysTHUuBhE7gHqq4Gf/vIe36hAAdKEYlH6rhlPx7MHus7caxW\n
+      //         x0khT0JudE4pvIs7i7cA0GLDOCNUUjXCboftywIDAQABAoIBADJsJWxuBvCHgT1i\n
+      //         TadMqcRmxKZK6fw/FKPr1HIo8cNi9GXNhQsMUyiSkxQlU5aqCJk4SACiUjHAs259\n
+      //         USdSPABZOjA7skeja8ojivbGbz8DUXstDEDtV+rqrgz7HsQKXKENl/4nN/ev3W2L\n
+      //         SWHdgs6K0ptVRcoYCoU2Z6QGSIAXevr20UgnZJFOAiqYf4ypcKgtPMmFOqWdUDD3\n
+      //         xVdJVWWg58Bo+GiyyXb+pExlr2M3IbVnRaBfcjuzAQK/jc3OObHozxkBew2jqCUb\n
+      //         uUjEZCTC12Jqmuyiq0y2uGTOwOeD29Doco5rLK1Eryr0jL22cU0BimeZWz3TiiXo\n
+      //         cpMBdsECgYEA8s5unMSH+gUn1Y9tw/WEkhub0RhqWcX8VcUNMNS8ArlxRtbD1K6n\n
+      //         4fctdtuOWKZRF/ETMakY5wtD5XQX8NYKF5OV6ic/Qd2woRT8sLE9UPWoGAxvJfXP\n
+      //         DzZp8zivyOm0GK9sx/bzAtbjSGHKHfw7DaHLviUI4xWs04IVsQ9xw0kCgYEAy14q\n
+      //         67Vw4CKKwI0Pllm1Q8iPXuRngG+YJNh4J/TEM0itrGQjfZHyjLfGvYm1q1+nUQLL\n
+      //         lAsfO5qtk7wI6OTkfSWDXYglg6PJv/2yUMeL4wixPE5bZLt41THLtZLZUeSDS1T7\n
+      //         i9eaRY3PJ0XsWeXr5eXP5N8OhXlUIpeK/cZPlHMCgYBJanG3pRUYXAa3ZC7kWZBE\n
+      //         PWTXzHIbwumRZYufgDN4/2lo6fc8j7LjeEGe9rQLyf4rJxGOqnqFIbrd3kR+5bkX\n
+      //         d+CUdFmEKOwHSLk/E9heamjxHJFfAPwitWlDyZgdP8zcye4yaFECQsdmU2sxtdqF\n
+      //         PK7GR5xwTVV8fpDggLL9QQKBgDLcHBPSzqXfPaAmJw3M5Z5MHD75FEF0pzIfyP0F\n
+      //         I8RHmteQO6f9xhEXLObd98ciJvAFqPAfT/JSHrLhxcCo7dO2fAH6OJeRcLVJNz0o\n
+      //         in1/AQQ5/HVWxUNcLrv8O8lVQtimKjqw8u4OJw6FWDSrYbGfJbzxY+pRi48TIzmQ\n
+      //         TPqtAoGABf9wG0Xbw+eyIYLHvlLHOiqMqv9RrFGZTdNkfalWY5X7dhPAc1fDjLL7\n
+      //         5mGulra/v1Zb+jTa5rajjKbwK5seSR25kbw9cIYOtbiu/eiq90rURdQLL9QKxRo5\n
+      //         YXDbQjIsRMppHBfWWn6hZzzPJWWyhZMp66Wg/KLEo0wcQhv4w80=\n
+      //         -----END RSA PRIVATE KEY-----\n
+      //         `,
+      // });
+
+      // socket.on("connect", () => {
+      //   console.log(socket.id); // "G5p5..."
+      //   const engine = socket.io.engine;
+      //   console.log(engine.transport.name);
+      //   console.log(socket);
+      // });
+
+      // socket.on("error", (error) => {
+      //   console.error({ error });
+      // });
+    </script>
   </body>
 </html>
