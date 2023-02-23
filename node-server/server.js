@@ -51,6 +51,12 @@ servIo.on("connection", function (socket) {
     // console.log(socket);
     socket.emit("second", { second: new Date().getTime() });
   }, 1000);
+
+  console.log("connect");
+
+  socket.on("ping", (count) => {
+    console.log({ count });
+  });
 });
 // Socket End
 
