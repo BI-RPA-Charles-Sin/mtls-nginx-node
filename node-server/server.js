@@ -92,9 +92,10 @@ app.get("/api/cert", (req, res) => {
   console.log("outside if");
   // console.log(ja3_str);
   console.log(ja3Hash);
+  console.log(req.auth)
 
-  res.setHeader("x-tls-fingerprint", ja3Hash);
-  res.cookie("tls-fingerprint", ja3Hash, { maxAge: 900000, httpOnly: true });
+  // res.setHeader("x-tls-fingerprint", ja3Hash);
+  // res.cookie("tls-fingerprint", ja3Hash, { maxAge: 900000, httpOnly: true });
 
   // Unique
   // console.log("ssl_curves : unique");
