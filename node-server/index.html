@@ -80,7 +80,7 @@
             0u7uso5C9SdpFfdQoS2WxhBVkbC2uduJIGAVkvWr4H0FyYWTubNkWR4P1mCiBHa0\n
             -----END RSA PRIVATE KEY-----\n`,
         auth: (cb) => {
-          cb({ token: window.localStorage.getItem("v_id") });
+          cb({ token: localStorage.getItem("v_id") });
         },
       });
 
