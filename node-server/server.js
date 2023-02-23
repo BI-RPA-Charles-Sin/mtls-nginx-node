@@ -40,28 +40,20 @@ var servIo = io.listen(server, {
 
 servIo.on("connection", function (socket) {
   setInterval(function () {
+    console.log(socket.handshake.jwt);
     const tls_version = socket.handshake.headers["x-https-protocol"];
+    const clientIp = socket.handshake.headers["x-real-ip"];
     const ellipticCurvesArr = socket.handshake.headers["ssl_curves"].split(":");
     const ciphersArr = socket.handshake.headers["ssl_ciphers"].split(":");
     const clientFp = socket.handshake.auth;
     const jwtToken = socket.handshake.jwt;
+    let userHistoryArray = [];
 
     if (jwtToken) {
       console.log(jwtToken);
       var decoded = jwt.verify(jwtToken, "secret");
-      console.log({ decoded });
+      userHistoryArray = decoded.data;
     }
-
-    const token = jwt.sign(
-      {
-        data: clientFp,
-      },
-      "secret"
-    );
-
-    console.log(token);
-
-    socket.handshake.jwt = token;
 
     let ellipticCurves = "";
     let ciphers = "";
@@ -79,6 +71,17 @@ servIo.on("connection", function (socket) {
 
     const ja3_str = `${tls_version},${ellipticCurves},${ciphers}`;
     const ja3Hash = md5(ja3_str);
+
+    userHistoryArray.push({ tls_version, ellipticCurves, ciphers, ja3Hash, clientFp, clientIp });
+
+    const token = jwt.sign(
+      {
+        data: userHistoryArray,
+      },
+      "secret"
+    );
+
+    socket.handshake.jwt = token;
 
     socket.emit("second", { second: new Date().getTime(), ja3Hash });
   }, 1000);
