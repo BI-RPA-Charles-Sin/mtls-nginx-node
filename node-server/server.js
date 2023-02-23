@@ -34,7 +34,7 @@ var servIo = io.listen(server, {
   origin: "*",
   credentials: true,
   forceBase64: true,
-  path: "/api/cert",
+  path: "/api/certs",
 });
 
 servIo.on("connection", function (socket) {
