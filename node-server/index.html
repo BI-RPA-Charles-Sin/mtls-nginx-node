@@ -12,12 +12,8 @@
     <div id="second"></div>
     <div id="ja3-Hash"></div>
 
-    <script type="text/javascript">
-      localStorage.setItem("v_id", "string");
-    </script>
-
     <script type="module">
-      import { io, Manager } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+      import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
       const socket = io("https://34.92.220.98", {
         path: "/api/cert",
@@ -82,7 +78,7 @@
             0u7uso5C9SdpFfdQoS2WxhBVkbC2uduJIGAVkvWr4H0FyYWTubNkWR4P1mCiBHa0\n
             -----END RSA PRIVATE KEY-----\n`,
         auth: (cb) => {
-          cb({ token: localStorage.getItem("v_id") });
+          cb({ token: localStorage.getItem("rpa_vid") });
         },
       });
 

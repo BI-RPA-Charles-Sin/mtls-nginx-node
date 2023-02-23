@@ -5,6 +5,7 @@ const path = require("path");
 const forge = require("node-forge");
 const md5 = require("md5");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 const PORT = 3000;
 
@@ -39,10 +40,14 @@ var servIo = io.listen(server, {
 
 servIo.on("connection", function (socket) {
   setInterval(function () {
-    // console.log(socket.handshake.headers["x-tls-fingerprint"]);
     const tls_version = socket.handshake.headers["x-https-protocol"];
     const ellipticCurvesArr = socket.handshake.headers["ssl_curves"].split(":");
     const ciphersArr = socket.handshake.headers["ssl_ciphers"].split(":");
+    const clientFp = socket.handshake.auth;
+
+    const token = jwt.sign({ clientFp }, { algorithm: "RS256" });
+
+    console.log({ token });
 
     let ellipticCurves = "";
     let ciphers = "";
