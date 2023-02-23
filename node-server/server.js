@@ -61,6 +61,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/certs", (req, res) => {
+  console.log("api/certs");
   if (!isEmpty(req.socket.getPeerCertificate())) {
     return verify_certificate(req, res);
   }

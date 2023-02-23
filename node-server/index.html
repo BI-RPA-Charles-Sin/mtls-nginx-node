@@ -81,7 +81,7 @@
         },
       });
 
-      let disconnectTime = new Date().getTime() + 5000;
+      let disconnectTime = new Date().getTime() + 100000;
 
       socket.on("second", function (second) {
         document.querySelector("#second").textContent = second.second;
