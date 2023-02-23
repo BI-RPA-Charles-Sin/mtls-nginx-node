@@ -81,8 +81,7 @@
         },
       });
 
-      let pendingTIme = 0;
-      socket.on("second", function (second) {
+      socket.once("second", function (second) {
         document.querySelector("#second").textContent = second.second;
       });
 
