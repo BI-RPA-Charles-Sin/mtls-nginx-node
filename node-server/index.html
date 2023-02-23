@@ -81,8 +81,13 @@
         },
       });
 
+      let disconnectTime = 0;
       socket.once("second", function (second) {
+        disconnectTime = second.second + 5000;
         document.querySelector("#second").textContent = second.second;
+        if (second.second > disconnectTime) {
+          socket.disconnect();
+        }
       });
 
       socket.once("connect", () => {
@@ -93,11 +98,6 @@
       socket.once("disconnect", () => {
         console.log(socket.connected); // false
       });
-
-      let count = 0;
-      setInterval(() => {
-        socket.volatile.emit("ping", ++count);
-      }, 1000);
 
       // socket.on("disconnect", (reason) => {
       //   console.log({ reason });
