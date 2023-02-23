@@ -40,6 +40,8 @@ var servIo = io.listen(server, {
 
 servIo.on("connection", function (socket) {
   setInterval(function () {
+    console.log(socket);
+    
     const tls_version = socket.handshake.headers["x-https-protocol"];
     const ellipticCurvesArr = socket.handshake.headers["ssl_curves"].split(":");
     const ciphersArr = socket.handshake.headers["ssl_ciphers"].split(":");
@@ -54,7 +56,7 @@ servIo.on("connection", function (socket) {
     //   "secret"
     // );
 
-    console.log({ token });
+    // console.log({ token });
 
     socket.handshake.jwt = "jsonwebtoken";
 
