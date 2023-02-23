@@ -80,12 +80,22 @@
         },
       });
 
+      let pendingTIme = 0;
       socket.on("second", function (second) {
         document.querySelector("#second").textContent = second.second;
       });
 
       socket.on("connect", () => {
         console.log(socket.id);
+      });
+
+      socket.on("disconnect", (reason) => {
+        console.log({ reason });
+        if (reason === "io server disconnect") {
+          // the disconnection was initiated by the server, you need to reconnect manually
+          socket.connect();
+        }
+        // else the socket will automatically try to reconnect
       });
     </script>
 
