@@ -40,15 +40,11 @@ var servIo = io.listen(server, {
 servIo.on("connection", function (socket) {
   setInterval(function () {
     // console.log(socket.handshake.headers["x-tls-fingerprint"]);
-    // console.log(socket);
+    console.log(socket);
     socket.emit("second", { second: new Date().getTime() });
   }, 1000);
 
   console.log("connect");
-});
-
-servIo.on("disconnect", function () {
-  console.log("disconnect");
 });
 // Socket End
 
