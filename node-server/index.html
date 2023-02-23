@@ -85,28 +85,20 @@
 
       socket.on("second", function (second) {
         document.querySelector("#second").textContent = second.second;
+        // Auto disconnect after 5second
         if (second.second > disconnectTime) {
           socket.disconnect();
         }
       });
 
       socket.on("connect", () => {
-        console.log(socket.connected); // true
+        console.log(`Socket is connected? : ${socket.connected}`); // true
         console.log(socket.id);
       });
 
       socket.on("disconnect", () => {
-        console.log(socket.connected); // false
+        console.log(`Socket is connected? : ${socket.connected}`); // false
       });
-
-      // socket.on("disconnect", (reason) => {
-      //   console.log({ reason });
-      //   if (reason === "io server disconnect") {
-      //     // the disconnection was initiated by the server, you need to reconnect manually
-      //     socket.connect();
-      //   }
-      //   // else the socket will automatically try to reconnect
-      // });
     </script>
 
     <!-- <script type="module">
