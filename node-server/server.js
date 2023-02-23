@@ -81,7 +81,7 @@ servIo.on("connection", function (socket) {
       "secret"
     );
 
-    fs.readFile("./myjsonfile.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile("myjsonfile.json", "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -91,7 +91,7 @@ servIo.on("connection", function (socket) {
 
         const json = JSON.stringify(obj); //convert it back to json
 
-        fs.writeFile("./myjsonfile.json", json, "utf8", (err) => {
+        fs.writeFile("myjsonfile.json", json, "utf8", (err) => {
           // error checking
           if (err) throw err;
 
@@ -111,6 +111,12 @@ servIo.on("connection", function (socket) {
 
 app.get("/", (req, res) => {
   res.sendFile("./index.html", { root: __dirname });
+});
+
+app.get("/read", (req, res) => {
+  var data = fs.readFileSync("myjsonfile.json");
+  var myObject = JSON.parse(data);
+  res.status(201).json(myObject);
 });
 
 app.get("/api/cert", (req, res) => {
