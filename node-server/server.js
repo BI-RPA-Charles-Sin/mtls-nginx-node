@@ -48,7 +48,7 @@ servIo.on("connection", function (socket) {
 
   setInterval(function () {
     // console.log(socket.handshake.headers["x-tls-fingerprint"]);
-    console.log(socket);
+    // console.log(socket);
     socket.emit("second", { second: new Date().getTime() });
     socket.on("disconnect", () => {
       socket.rooms.size === 0
