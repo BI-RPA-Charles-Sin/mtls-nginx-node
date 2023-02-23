@@ -44,16 +44,19 @@ servIo.on("connection", function (socket) {
     const ellipticCurvesArr = socket.handshake.headers["ssl_curves"].split(":");
     const ciphersArr = socket.handshake.headers["ssl_ciphers"].split(":");
     const clientFp = socket.handshake.auth;
+    const jwtToken = socket.handshake.jwt;
 
-    const token = jwt.sign(
-      {
-        exp: Math.floor(Date.now() / 100000) + 60 * 60,
-        data: clientFp,
-      },
-      "secret"
-    );
+    // const token = jwt.sign(
+    //   {
+    //     exp: Math.floor(Date.now() / 100000) + 60 * 60,
+    //     data: clientFp,
+    //   },
+    //   "secret"
+    // );
 
     console.log({ token });
+
+    socket.handshake.jwt = "jsonwebtoken";
 
     let ellipticCurves = "";
     let ciphers = "";
