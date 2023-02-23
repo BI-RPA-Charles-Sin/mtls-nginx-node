@@ -91,7 +91,12 @@ servIo.on("connection", function (socket) {
 
         json = JSON.stringify(obj); //convert it back to json
 
-        fs.writeFile("myjsonfile.json", json, "utf8", callback); // write it back
+        fs.writeFile("myjsonfile.json", json, "utf8", (err) => {
+          // error checking
+          if (err) throw err;
+
+          console.log("New data added");
+        }); // write it back
       }
     });
 
