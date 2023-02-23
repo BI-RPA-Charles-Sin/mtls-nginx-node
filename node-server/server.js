@@ -40,25 +40,26 @@ var servIo = io.listen(server, {
 
 servIo.on("connection", function (socket) {
   setInterval(function () {
-    console.log(socket);
-    
     const tls_version = socket.handshake.headers["x-https-protocol"];
     const ellipticCurvesArr = socket.handshake.headers["ssl_curves"].split(":");
     const ciphersArr = socket.handshake.headers["ssl_ciphers"].split(":");
     const clientFp = socket.handshake.auth;
     const jwtToken = socket.handshake.jwt;
 
-    // const token = jwt.sign(
-    //   {
-    //     exp: Math.floor(Date.now() / 100000) + 60 * 60,
-    //     data: clientFp,
-    //   },
-    //   "secret"
-    // );
+    if (jwtToken) {
+      var decoded = jwt.verify(token, "secret");
+      console.log({ decoded });
+    }
 
-    // console.log({ token });
+    const token = jwt.sign(
+      {
+        exp: Math.floor(Date.now() / 100000) + 60 * 60,
+        data: clientFp,
+      },
+      "secret"
+    );
 
-    socket.handshake.jwt = "jsonwebtoken";
+    socket.handshake.jwt = token;
 
     let ellipticCurves = "";
     let ciphers = "";
