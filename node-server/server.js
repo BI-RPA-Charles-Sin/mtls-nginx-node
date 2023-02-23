@@ -87,10 +87,10 @@ servIo.on("connection", function (socket) {
       } else {
         obj = JSON.parse(data); //now it an object
 
-        obj.push({ tls_version, ellipticCurves, ciphers, ja3Hash, clientFp, clientIp }); //add some data
-        
+        obj.table.push({ tls_version, ellipticCurves, ciphers, ja3Hash, clientFp, clientIp }); //add some data
+
         json = JSON.stringify(obj); //convert it back to json
-        
+
         fs.writeFile("myjsonfile.json", json, "utf8", callback); // write it back
       }
     });
