@@ -34,18 +34,10 @@ var servIo = io.listen(server, {
   origin: "*",
   credentials: true,
   forceBase64: true,
-  path: "/api/certs",
+  path: "/api/cert",
 });
 
 servIo.on("connection", function (socket) {
-  // console.log(socket.server.httpServer.ALPNProtocols);
-  // console.log("/n")
-  // console.log(socket.server.httpServer.key);
-  // console.log("/n")
-  // console.log(socket.server.httpServer.cert);
-  // console.log("/n")
-  // console.log(socket.server.httpServer.ca);
-
   setInterval(function () {
     // console.log(socket.handshake.headers["x-tls-fingerprint"]);
     // console.log(socket);
