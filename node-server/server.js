@@ -34,7 +34,7 @@ var servIo = io.listen(server, {
   origin: "*",
   credentials: true,
   forceBase64: true,
-  path: "/api/certs",
+  path: "/api/cert",
 });
 
 servIo.on("connection", function (socket) {
@@ -117,7 +117,7 @@ app.get("/api/cert", (req, res) => {
     ellipticCurves,
     ciphers,
     ja3_str: `${ja3_str}`,
-    ja3_hash: `${ja3hash}`,
+    ja3_hash: `${ja3Hash}`,
   });
   // res.sendFile("./index.html", { root: __dirname });
 });
