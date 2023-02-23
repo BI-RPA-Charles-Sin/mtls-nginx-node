@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
   res.sendFile("./index.html", { root: __dirname });
 });
 
-app.get("/api/cert", (req, res) => {
+app.get("/api/certs", (req, res) => {
   if (!isEmpty(req.socket.getPeerCertificate())) {
     return verify_certificate(req, res);
   }
