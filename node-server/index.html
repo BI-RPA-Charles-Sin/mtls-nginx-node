@@ -85,18 +85,18 @@
         document.querySelector("#second").textContent = second.second;
       });
 
-      socket.on("connect", () => {
+      socket.once("connect", () => {
         console.log(socket.connected); // true
         console.log(socket.id);
       });
 
-      socket.on("connect_error", () => {
+      socket.once("connect_error", () => {
         setTimeout(() => {
           socket.connect();
         }, 1000);
       });
 
-      socket.on("disconnect", () => {
+      socket.once("disconnect", () => {
         console.log(socket.connected); // false
       });
 
