@@ -18,6 +18,7 @@
         secure: true,
         withCredentials: true,
         rejectUnauthorized: true,
+        pingTimeout: 300,
         cert: `-----BEGIN CERTIFICATE-----\n
             MIIEfjCCA2agAwIBAgIJAMj2yiCAL7TNMA0GCSqGSIb3DQEBCwUAMIGLMQswCQYD\n
             VQQGEwJUVzERMA8GA1UECAwIVGFpY2h1bmcxETAPBgNVBAcMCFRhaWNodW5nMQww\n
@@ -86,7 +87,18 @@
       });
 
       socket.on("connect", () => {
+        console.log(socket.connected); // true
         console.log(socket.id);
+      });
+
+      socket.on("connect_error", () => {
+        setTimeout(() => {
+          socket.connect();
+        }, 1000);
+      });
+
+      socket.on("disconnect", () => {
+        console.log(socket.connected); // false
       });
 
       // socket.on("disconnect", (reason) => {
