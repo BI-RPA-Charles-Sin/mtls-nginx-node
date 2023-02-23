@@ -54,7 +54,6 @@ servIo.on("connection", function (socket) {
 
     const token = jwt.sign(
       {
-        exp: Math.floor(Date.now() / 100000) + 60 * 60,
         data: clientFp,
       },
       "secret"
