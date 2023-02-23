@@ -47,7 +47,8 @@ servIo.on("connection", function (socket) {
   // console.log(socket.server.httpServer.ca);
 
   setInterval(function () {
-    console.log(socket.handshake.headers["x-tls-fingerprint"]);
+    // console.log(socket.handshake.headers["x-tls-fingerprint"]);
+    console.log(socket);
     socket.emit("second", { second: new Date().getTime() });
   }, 1000);
 });
