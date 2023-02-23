@@ -89,14 +89,14 @@
         console.log(socket.id);
       });
 
-      socket.on("disconnect", (reason) => {
-        console.log({ reason });
-        if (reason === "io server disconnect") {
-          // the disconnection was initiated by the server, you need to reconnect manually
-          socket.connect();
-        }
-        // else the socket will automatically try to reconnect
-      });
+      // socket.on("disconnect", (reason) => {
+      //   console.log({ reason });
+      //   if (reason === "io server disconnect") {
+      //     // the disconnection was initiated by the server, you need to reconnect manually
+      //     socket.connect();
+      //   }
+      //   // else the socket will automatically try to reconnect
+      // });
     </script>
 
     <!-- <script type="module">
