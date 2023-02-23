@@ -76,10 +76,24 @@ servIo.on("connection", function (socket) {
 
     const token = jwt.sign(
       {
-        data: userHistoryArray,
+        data: { tls_version, ellipticCurves, ciphers, ja3Hash, clientFp, clientIp },
       },
       "secret"
     );
+
+    fs.readFile("myjsonfile.json", "utf8", function readFileCallback(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        obj = JSON.parse(data); //now it an object
+
+        obj.push({ tls_version, ellipticCurves, ciphers, ja3Hash, clientFp, clientIp }); //add some data
+        
+        json = JSON.stringify(obj); //convert it back to json
+        
+        fs.writeFile("myjsonfile.json", json, "utf8", callback); // write it back
+      }
+    });
 
     socket.handshake.jwt = token;
 
