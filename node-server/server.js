@@ -50,6 +50,7 @@ servIo.on("connection", function (socket) {
     // console.log(socket.handshake.headers["x-tls-fingerprint"]);
     console.log(socket);
     socket.emit("second", { second: new Date().getTime() });
+    socket.disconnect();
   }, 1000);
 });
 // Socket End
