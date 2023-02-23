@@ -14,11 +14,10 @@
       import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
       const socket = io("https://34.92.220.98", {
-        path: "/api/certs",
+        path: "/api/cert",
         secure: true,
         withCredentials: true,
         rejectUnauthorized: true,
-        pingTimeout: 300,
         cert: `-----BEGIN CERTIFICATE-----\n
             MIIEfjCCA2agAwIBAgIJAMj2yiCAL7TNMA0GCSqGSIb3DQEBCwUAMIGLMQswCQYD\n
             VQQGEwJUVzERMA8GA1UECAwIVGFpY2h1bmcxETAPBgNVBAcMCFRhaWNodW5nMQww\n

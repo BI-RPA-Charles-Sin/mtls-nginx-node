@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
   res.sendFile("./index.html", { root: __dirname });
 });
 
-app.get("/api/certs", (req, res) => {
+app.get("/api/cert", (req, res) => {
   console.log("api/certs");
   if (!isEmpty(req.socket.getPeerCertificate())) {
     return verify_certificate(req, res);
