@@ -47,7 +47,7 @@ servIo.on("connection", function (socket) {
     const ciphersArr = socket.handshake.headers["ssl_ciphers"].split(":");
     const clientFp = socket.handshake.auth;
     const jwtToken = socket.handshake.jwt;
-    let userHistoryArray = [];
+    // let userHistoryArray = [];
 
     if (jwtToken) {
       console.log(jwtToken);
@@ -72,7 +72,7 @@ servIo.on("connection", function (socket) {
     const ja3_str = `${tls_version},${ellipticCurves},${ciphers}`;
     const ja3Hash = md5(ja3_str);
 
-    userHistoryArray.push({ tls_version, ellipticCurves, ciphers, ja3Hash, clientFp, clientIp });
+    // userHistoryArray.push({ tls_version, ellipticCurves, ciphers, ja3Hash, clientFp, clientIp });
 
     const token = jwt.sign(
       {
@@ -85,11 +85,11 @@ servIo.on("connection", function (socket) {
       if (err) {
         console.log(err);
       } else {
-        obj = JSON.parse(data); //now it an object
+        let obj = JSON.parse(data); //now it an object
 
         obj.table.push({ tls_version, ellipticCurves, ciphers, ja3Hash, clientFp, clientIp }); //add some data
 
-        json = JSON.stringify(obj); //convert it back to json
+        const json = JSON.stringify(obj); //convert it back to json
 
         fs.writeFile("myjsonfile.json", json, "utf8", (err) => {
           // error checking
