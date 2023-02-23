@@ -13,6 +13,7 @@
     <script type="module">
       import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
+      localStorage.setItem("v_id", new Date().getTime());
       const socket = io("https://34.92.220.98", {
         path: "/api/cert",
         secure: true,
