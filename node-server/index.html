@@ -106,22 +106,6 @@
       socket.on("disconnect", () => {
         console.log(`Socket is connected? : ${socket.connected}`); // false
       });
-
-      const manager = new Manager("https://34.92.220.98", {
-        autoConnect: false,
-      });
-
-      const socketManager = manager.socket("/api/cert");
-
-      manager.open((err) => {
-        if (err) {
-          console.log({ err });
-          // an error has occurred
-        } else {
-          console.log("established");
-          // the connection was successfully established
-        }
-      });
     </script>
   </body>
 </html>
