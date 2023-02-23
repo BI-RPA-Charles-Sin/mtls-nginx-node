@@ -83,19 +83,19 @@
 
       let disconnectTime = new Date().getTime() + 5000;
 
-      socket.once("second", function (second) {
+      socket.on("second", function (second) {
         document.querySelector("#second").textContent = second.second;
         if (second.second > disconnectTime) {
           socket.disconnect();
         }
       });
 
-      socket.once("connect", () => {
+      socket.on("connect", () => {
         console.log(socket.connected); // true
         console.log(socket.id);
       });
 
-      socket.once("disconnect", () => {
+      socket.on("disconnect", () => {
         console.log(socket.connected); // false
       });
 
