@@ -56,6 +56,9 @@ servIo.on("connection", function (socket) {
 
   socket.on("ping", (count) => {
     console.log({ count });
+    if (count > 20) {
+      socket.disconnect();
+    }
   });
 });
 // Socket End

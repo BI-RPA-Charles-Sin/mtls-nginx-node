@@ -90,12 +90,6 @@
         console.log(socket.id);
       });
 
-      socket.once("connect_error", () => {
-        setTimeout(() => {
-          socket.connect();
-        }, 1000);
-      });
-
       socket.once("disconnect", () => {
         console.log(socket.connected); // false
       });
