@@ -46,6 +46,10 @@ servIo.on("connection", function (socket) {
 
   console.log("connect");
 });
+
+servIo.on("disconnect", function () {
+  console.log("disconnect");
+});
 // Socket End
 
 app.get("/", (req, res) => {
@@ -84,7 +88,7 @@ app.get("/api/cert", (req, res) => {
   console.log("outside if");
   // console.log(ja3_str);
   console.log(ja3Hash);
-  console.log(req.auth)
+  console.log(req.auth);
 
   // res.setHeader("x-tls-fingerprint", ja3Hash);
   // res.cookie("tls-fingerprint", ja3Hash, { maxAge: 900000, httpOnly: true });
