@@ -45,7 +45,13 @@ servIo.on("connection", function (socket) {
     const ciphersArr = socket.handshake.headers["ssl_ciphers"].split(":");
     const clientFp = socket.handshake.auth;
 
-    const token = jwt.sign({ clientFp }, { algorithm: "RS256" });
+    const token = jwt.sign(
+      {
+        exp: Math.floor(Date.now() / 100000) + 60 * 60,
+        data: clientFp,
+      },
+      "secret"
+    );
 
     console.log({ token });
 
