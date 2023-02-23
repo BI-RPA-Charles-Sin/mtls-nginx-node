@@ -84,6 +84,7 @@
         },
       });
 
+      // 10 second after
       let disconnectTime = new Date().getTime() + 10000;
 
       socket.on("second", function (second) {
@@ -102,95 +103,22 @@
       socket.on("disconnect", () => {
         console.log(`Socket is connected? : ${socket.connected}`); // false
       });
-    </script>
 
-    <!-- <script type="module">
-      import axios from "axios";
-      import https from "https";
+      const manager = new Manager("https://34.92.220.98", {
+        autoConnect: false,
+      });
 
-      async function queryAPI() {
-        try {
-          const cert = `-----BEGIN CERTIFICATE-----\n
-          MIIC7jCCAdYCCQDktAAw/9RkAjANBgkqhkiG9w0BAQsFADAyMTAwLgYDVQQKDCdU\n
-          TFMgUHJvamVjdCBEb2RneSBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkwHhcNMjMwMjIx\n
-          MDU0MzU3WhcNMjQwNzA1MDU0MzU3WjBAMScwJQYDVQQKDB5UTFMgUHJvamVjdCBE\n
-          ZXZpY2UgQ2VydGlmaWNhdGUxFTATBgNVBAMMDDM0LjkyLjIyMC45ODCCASIwDQYJ\n
-          KoZIhvcNAQEBBQADggEPADCCAQoCggEBALayudyXrhDw745LfY4XBBUKWSlVL6ya\n
-          FYh6WjKA1w/nHkVSYXHXSssMuml6uCKQduIAZhaxcy36fjl6zyMTI4dURXpzkFYc\n
-          1cskWYkAEtpWersgmS0+P+Q8ztJTcp1eWIQzfqIzarycoLspWRIlTMV03tk+1cYV\n
-          rmF2+UqOJUA1uze1pcS1273MrFfzgeWJ8wq9Z7pjz7b2qSmUoQjciVkgwQMDIQLj\n
-          9B+QVgE8JLMhwLcfn12yz6Hze1qNEW3JVrltH6Iv3W1X5hdH+rElq1XY9UwyeJe0\n
-          M6AUwhR/tftErM1Eqv6DtGXK8nzjdf9jMzKkw7+tqYgHj6Xc//J1hN0CAwEAATAN\n
-          BgkqhkiG9w0BAQsFAAOCAQEALUuKGzWS+dxFii8veUSpjjKmb8xcnaHrHHt9/t4b\n
-          B+Q5UTyhIH0qdMHqcc+OYFPNllbkqL2PYTIyswYohuPH+lbR3+q4bN81zocsvHaY\n
-          /119LmnqZk+uDyGCYgBLi9dMssySyfiYW7a0fPRcuoB+Xj1/Of16EIFtOVFwwS/X\n
-          LgdPAExB8NFXzXDgvtrq/G6pj/ufa2Wm+oRpCXskj2jkWRMNvStD9ULTKL/G6J20\n
-          mnVM35UUJbQdULIJZyUdECmdvT9/ypNNCP6JxjqWPnysp3JeuHuteQENRxSL9ieY\n
-          uSQPq6TYBuQai3FJDZcrMWi7y1aEf0rvbAq2QyHKOq8yNg==\n
-          -----END CERTIFICATE-----\n
-          `;
-          const key = `-----BEGIN RSA PRIVATE KEY-----\n
-          MIIEpAIBAAKCAQEAtrK53JeuEPDvjkt9jhcEFQpZKVUvrJoViHpaMoDXD+ceRVJh\n
-          cddKywy6aXq4IpB24gBmFrFzLfp+OXrPIxMjh1RFenOQVhzVyyRZiQAS2lZ6uyCZ\n
-          LT4/5DzO0lNynV5YhDN+ojNqvJyguylZEiVMxXTe2T7VxhWuYXb5So4lQDW7N7Wl\n
-          xLXbvcysV/OB5YnzCr1numPPtvapKZShCNyJWSDBAwMhAuP0H5BWATwksyHAtx+f\n
-          XbLPofN7Wo0RbclWuW0foi/dbVfmF0f6sSWrVdj1TDJ4l7QzoBTCFH+1+0SszUSq\n
-          /oO0ZcryfON1/2MzMqTDv62piAePpdz/8nWE3QIDAQABAoIBAGl5Fvn2C0S2g+Yn\n
-          SM3eFbo75iuJhWNk9Sd8U1Qys3X33K7yl1UMkJ5Ws8uvUFyMAEYLKuTQ/wi9Q1/V\n
-          uX2rT+iRyyadTueX8Ak96/6+ryOjp2kesa+/70zJmjEsgc++JuXzgJkNjAJlfhlv\n
-          Dn/+Tqr0BK9wqiOYYrrb36GeHH1LThwW6JB54U7YF82sjqmzdenHuk7Onk7MVgXa\n
-          lwRui7EIy0LQgot8Ts1Rl6Y0oj0PILBUhb3oQMgQiCMgoIguFt1UCMSaBCKuzsXY\n
-          U+muRBxrUzI1Vk/7iXe79QxZlNkxLOJrE81vF9Nxmfk4bccE+uBNiex5Fb6ZyMKl\n
-          dmrYNhUCgYEA2IGqMnE5Jt8vRaabyWBTlcGx/rcDATg/FiXA65eMPxcwa9Xrk1bV\n
-          lDct8pd2/J1rMLJiImnFfDONryegI8Y58D9va41nQQLluolFv71sIRuNr0laWTFf\n
-          6clvBnNoCWNPbY+VAdgCvnHLaV6dD2WbUogvZiJAfJwPTNUmv1X/KKMCgYEA2AZK\n
-          wDcBTj3MobrHcvmy5H48fCotGS863Ej6+xSXoCFqw/gKI+w/kCkDOnjdGWd5Qyax\n
-          EJh9BbLgX4do/v9m3RJxA0MQ6OxrMOp5p94sUtP453MV4ZaPVY5EKKGKo0H6vZ3O\n
-          sGuuq+1RKRYjp//+MpGtgOTZw91g0uD2f0qX9H8CgYANFDAq4eoY7gyWAY2Rqa8C\n
-          8fOFtpqI3VP6S4eO89W2DfmP2hlkCi/Wx0qQSBQZCI1sIKqK96bFbPvXI+apopTn\n
-          bX2WmrEtHTaxgQ9kmNXKXja96wl5L+FiZxe85QXY41XuAWl39gucY5VtJRkJ0BKE\n
-          9tMeMV2B6Y+HDa1Mi65hTwKBgQDFVOoPr69Xo4g77HypAINzygTCf1x29vfTpi7u\n
-          EJ95PU1j+j55FiPyMiSq0yFVRXo15zAzsrfx7rabTPySgweZxnDJxAe8XcqFAoti\n
-          1sayWsOx2SURzxDb3HtSik40V98OOwtFiPgkQUK0P28O1f+EfiJ57ZMnIiCCQdGp\n
-          8Z/hTQKBgQDHuTnAR76DWF2/RDMXDZXDPWjoVup0P8TKRHs1KDXKLnp4pof5I7/e\n
-          5UvEfRzqCHljx3RcCFbtwujNGZWuUM6J9sB5t0ZhlLQlQvmbsykNOBKdlxCfWghf\n
-          3MvxM9as4W1rwln9O7spcRQL88IE12u0pcjoOr8fatpWKUDWRKK2VA==\n
-          -----END RSA PRIVATE KEY-----\n
-          `;
+      const socketManager = manager.socket("/api/cert");
 
-          const hostName = "34.92.220.98";
-          const response = await axios.get(`https://${hostName}/api/cert`, {
-            httpsAgent: new https.Agent({ cert, key, rejectUnauthorized: false }),
-          });
-          // const response = await axios.get(`https://${hostName}/api/cert`, {
-          //   httpsAgent: new https.Agent({ cert, key, rejectUnauthorized: false, keepAlive: true }),
-          // });
-          console.log(response.data);
-          console.log("succeccfull");
-        } catch (e) {
-          const error = e;
-          if (!axios.isAxiosError(error)) {
-            console.log("native error");
-            // when it throws native error
-            console.log(error);
-          } else {
-            // when it throws axios error
-            if (error.request) {
-              console.log("request error");
-              // console.log(error.request);
-              //when requested but there is no response from server
-            }
-            if (error.response) {
-              console.log("response error");
-              // the request was made and server responsed tiwh a status code
-              // console.log(error.response.data);
-              // console.log(error.response.status);
-              // console.log(error.response.headers);
-            }
-          }
+      manager.open((err) => {
+        if (err) {
+          console.log({ err });
+          // an error has occurred
+        } else {
+          console.log("established");
+          // the connection was successfully established
         }
-      }
-      queryAPI();
-    </script> -->
+      });
+    </script>
   </body>
 </html>
