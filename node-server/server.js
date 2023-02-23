@@ -47,7 +47,7 @@ servIo.on("connection", function (socket) {
     const jwtToken = socket.handshake.jwt;
 
     if (jwtToken) {
-      var decoded = jwt.verify(token, "secret");
+      var decoded = jwt.verify(jwtToken, "secret");
       console.log({ decoded });
     }
 
