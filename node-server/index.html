@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ja3 Fingerprint</title>
+    <script src="./fp.js"></script>
   </head>
   <body>
     <h1>Ja3 Fingerprint</h1>
     <div id="second"></div>
+    <div id="ja3-Hash"></div>
 
     <script type="text/javascript">
       localStorage.setItem("v_id", "string");
@@ -89,7 +91,8 @@
 
       socket.on("second", function (second) {
         document.querySelector("#second").textContent = second.second;
-        // Auto disconnect after 5second
+        document.querySelector("#ja3-Hash").textContent = second.ja3Hash;
+        // Auto disconnect after 10second
         if (second.second > disconnectTime) {
           socket.disconnect();
         }

@@ -40,8 +40,28 @@ var servIo = io.listen(server, {
 servIo.on("connection", function (socket) {
   setInterval(function () {
     // console.log(socket.handshake.headers["x-tls-fingerprint"]);
-    console.log(socket);
-    socket.emit("second", { second: new Date().getTime() });
+    const tls_version = socket.handshake.headers["x-https-protocol"];
+    const ellipticCurvesArr = socket.handshake.headers["ssl_curves"].split(":");
+    const ciphersArr = socket.handshake.headers["ssl_ciphers"].split(":");
+
+    let ellipticCurves = "";
+    let ciphers = "";
+
+    ellipticCurvesArr.forEach((item) => {
+      ellipticCurves += `${item}-`;
+    });
+
+    ciphersArr.forEach((item) => {
+      ciphers += `${item}-`;
+    });
+
+    ellipticCurves = ellipticCurves.slice(0, -1) + "";
+    ciphers = ciphers.slice(0, -1) + "";
+
+    const ja3_str = `${tls_version},${ellipticCurves},${ciphers}`;
+    const ja3Hash = md5(ja3_str);
+
+    socket.emit("second", { second: new Date().getTime(), ja3Hash });
   }, 1000);
 
   console.log("connect");
@@ -81,13 +101,9 @@ app.get("/api/cert", (req, res) => {
   const ja3_str = `${tls_version},${ellipticCurves},${ciphers}`;
   const ja3Hash = md5(ja3_str);
 
-  console.log("outside if");
+  // console.log("outside if");
   // console.log(ja3_str);
-  console.log(ja3Hash);
-  console.log(req.auth);
-
-  // res.setHeader("x-tls-fingerprint", ja3Hash);
-  // res.cookie("tls-fingerprint", ja3Hash, { maxAge: 900000, httpOnly: true });
+  // console.log(ja3Hash);
 
   // Unique
   // console.log("ssl_curves : unique");
