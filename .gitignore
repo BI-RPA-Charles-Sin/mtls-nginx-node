@@ -4,7 +4,7 @@
 /certs-old/
 /custom-certs/
 /certs-21022023/
-/certs-true/
+/certs-trues/
 # /node-server/certs/
 /node-server/node_modules/
 /.idea/
