@@ -10,18 +10,18 @@ const jwt = require("jsonwebtoken");
 
 const PORT = 3000;
 
-const options = {
-  ca: fs.readFileSync(path.resolve(__dirname, "./certs/ca.crt")),
-  cert: fs.readFileSync(path.resolve(__dirname, "./certs/server.crt")),
-  key: fs.readFileSync(path.resolve(__dirname, "./certs/server.key")),
-  rejectUnauthorized: false,
-  requestCert: true,
-};
+// const options = {
+//   ca: fs.readFileSync(path.resolve(__dirname, "./certs/ca.crt")),
+//   cert: fs.readFileSync(path.resolve(__dirname, "./certs/server.crt")),
+//   key: fs.readFileSync(path.resolve(__dirname, "./certs/server.key")),
+//   rejectUnauthorized: false,
+//   requestCert: true,
+// };
 
 const app = express();
 
 // const server = https.createServer(options, app);
-const server = http.createServer(options, app);
+const server = http.createServer(app);
 server.listen(PORT, () => {
   console.log(`.. server up and running and listening on ${PORT} ..`);
 });
