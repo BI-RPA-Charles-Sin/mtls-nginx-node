@@ -23,3 +23,4 @@ services:
       - ./certs-true/server.key:/etc/ssl/server.key
       - ./certs-true/dhparams.pem:/etc/nginx/client_certs/dhparams.pem
       - ./certs-true/ca.crt:/etc/nginx/client_certs/ca.crt
+    restart: always
