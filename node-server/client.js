@@ -14,7 +14,7 @@ const { io } = require("socket.io-client");
 // domain
 // https://eliveplay.com/
 
-const socket = io("http://34.92.128.241:80");
+const socket = io("https://eliveplay.com");
 
 socket.on("connect", () => {
   console.log(socket.connected); // true
