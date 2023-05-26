@@ -38,7 +38,7 @@ const servIo = io.listen(server, {
   credentials: true,
   // forceBase64: true,
   // path: "/api/socket",
-  path: "/api/sockets",
+  path: "/",
 });
 
 // servIo.on("connection", function (socket) {
@@ -110,7 +110,7 @@ servIo.on("connection", function (socket) {
 });
 // end
 
-app.get("//api/sockets", (req, res) => {
+app.get("/api/home", (req, res) => {
   res.sendFile("./index.html", { root: __dirname });
 });
 
