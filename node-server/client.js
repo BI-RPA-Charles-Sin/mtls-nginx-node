@@ -14,7 +14,7 @@ const { io } = require("socket.io-client");
 // domain
 // https://eliveplay.com/
 
-const socket = io("http://localhost:3000");
+const socket = io("http://34.92.128.241:80");
 
 socket.on("connect", () => {
   console.log(socket.connected); // true
