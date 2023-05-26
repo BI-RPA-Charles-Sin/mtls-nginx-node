@@ -20,8 +20,8 @@ const options = {
 
 const app = express();
 
-const server = https.createServer(options, app);
-// const server = http.createServer(app);
+// const server = https.createServer(options, app);
+const server = http.createServer(app);
 server.listen(PORT, () => {
   console.log(`.. server up and running and listening on ${PORT} ..`);
 });
@@ -30,15 +30,16 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Socket Begin
-// const io = require("socket.io")();
+const io = require("socket.io")();
 
-// const servIo = io.listen(server, {
-//   cors: true,
-//   origin: "*",
-//   credentials: true,
-//   forceBase64: true,
-//   path: "/api/cert",
-// });
+const servIo = io.listen(server, {
+  cors: true,
+  // origin: "*",
+  // credentials: true,
+  // forceBase64: true,
+  // path: "/api/socket",
+  path: "/api/sockets",
+});
 
 // servIo.on("connection", function (socket) {
 //   setInterval(function () {
@@ -100,6 +101,15 @@ app.use(express.static(path.join(__dirname, "public")));
 // });
 // Socket End
 
+servIo.on("connection", function (socket) {
+  setInterval(function () {
+    socket.emit("second", { second: new Date().getTime() });
+  }, 5000);
+
+  console.log("connect");
+});
+// end
+
 app.get("/", (req, res) => {
   res.sendFile("./index.html", { root: __dirname });
 });
@@ -108,6 +118,10 @@ app.get("/read", (req, res) => {
   var data = fs.readFileSync("myjsonfile.json");
   var myObject = JSON.parse(data);
   res.status(201).json(myObject);
+});
+
+app.get("/api/socket", (req, res) => {
+  res.status(200).json({ msg: "api/socket connected" });
 });
 
 // app.get("/api/cert", (req, res) => {

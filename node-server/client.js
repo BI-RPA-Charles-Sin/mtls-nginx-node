@@ -2,20 +2,36 @@ const axios = require("axios");
 const https = require("https");
 const fs = require("fs");
 
+const { io } = require("socket.io-client");
+const socket = io("http://localhost:3000", {
+  path: "/api/sockets",
+});
+
+socket.on("connect", () => {
+  console.log(socket.connected); // true
+});
+
+socket.on("second", (...args) => {
+  console.log({ args });
+});
+
 const getRequestWithCertificate = async () => {
   try {
     const cert = fs.readFileSync("certs/client.crt");
     const key = fs.readFileSync("certs/client.key");
-    const hostName = "10.170.0.3";
+    // const hostName = "10.170.0.3";
     // const hostName = "192.168.94.16";
-    // const hostName = "localhost:3000";
+    const hostName = "localhost:3000";
     const httpsAgent = new https.Agent({
       cert,
       key,
       rejectUnauthorized: false,
     });
 
-    const response = await axios.get(`https://${hostName}/api/cert`, {
+    // const response = await axios.get(`https://${hostName}/api/cert`, {
+    //   httpsAgent,
+    // });
+    const response = await axios.get(`http://${hostName}/api/socket`, {
       httpsAgent,
     });
     console.log(response.data);
@@ -31,7 +47,7 @@ const getRequestWithCertificate = async () => {
       if (error.request) {
         console.log("request error");
         // console.log(error.request);
-        //when requested but there is no response from server
+        // when requested but there is no response from server
       }
       if (error.response) {
         console.log("response error");
@@ -44,6 +60,6 @@ const getRequestWithCertificate = async () => {
   }
 };
 
-setTimeout(() => {
-  getRequestWithCertificate();
-}, 10);
+// setTimeout(() => {
+//   getRequestWithCertificate();
+// }, 10);
