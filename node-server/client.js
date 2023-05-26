@@ -3,7 +3,11 @@ const https = require("https");
 const fs = require("fs");
 
 const { io } = require("socket.io-client");
-const socket = io("http://localhost:3000", {
+// const socket = io("http://localhost:3000", {
+//   path: "/api/sockets",
+// });
+
+const socket = io("http://34.92.128.241", {
   path: "/api/sockets",
 });
 
