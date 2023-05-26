@@ -7,7 +7,7 @@ const { io } = require("socket.io-client");
 //   path: "/api/sockets",
 // });
 
-const socket = io("34.92.128.241:8000", {
+const socket = io("https://34.92.128.241:8000", {
   path: "/api/sockets",
 });
 
