@@ -34,8 +34,8 @@ const io = require("socket.io")();
 
 const servIo = io.listen(server, {
   cors: true,
-  // origin: "*",
-  // credentials: true,
+  origin: "*",
+  credentials: true,
   // forceBase64: true,
   // path: "/api/socket",
   path: "/api/sockets",
