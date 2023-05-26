@@ -20,8 +20,8 @@ const options = {
 
 const app = express();
 
-const server = https.createServer(options, app);
-// const server = http.createServer(app);
+// const server = https.createServer(options, app);
+const server = http.createServer(app);
 server.listen(PORT, () => {
   console.log(`.. server up and running and listening on ${PORT} ..`);
 });
