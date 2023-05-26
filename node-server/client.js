@@ -14,14 +14,21 @@ const { io } = require("socket.io-client");
 // domain
 // https://eliveplay.com/
 
-const socket = io("https://eliveplay.com");
+// const socket = io("https://eliveplay.com");
+const socket = io("http://localhost:3000");
 
 socket.on("connect", () => {
   console.log(socket.connected); // true
+
+  setInterval(function () {
+    socket.emit("third", { second: `Sending from Client to Server, Timestamp: ${new Date().getTime()}` });
+  }, 10000);
+
+  console.log("connect");
 });
 
-socket.on("second", (...args) => {
-  console.log({ args });
+socket.on("second", (...server) => {
+  console.log({ server });
 });
 
 const getRequestWithCertificate = async () => {

@@ -20,8 +20,8 @@ const options = {
 
 const app = express();
 
-const server = https.createServer(options, app);
-// const server = http.createServer(app);
+// const server = https.createServer(options, app);
+const server = http.createServer(app);
 server.listen(PORT, () => {
   console.log(`.. server up and running and listening on ${PORT} ..`);
 });
@@ -103,8 +103,12 @@ const servIo = io.listen(server, {
 
 servIo.on("connection", function (socket) {
   setInterval(function () {
-    socket.emit("second", { second: new Date().getTime() });
+    socket.emit("second", { second: `Sending from Server to Client, Timestamp: ${new Date().getTime()}` });
   }, 5000);
+
+  socket.on("third", (...client) => {
+    console.log({ client });
+  });
 
   console.log("connect");
 });
