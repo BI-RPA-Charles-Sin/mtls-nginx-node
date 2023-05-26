@@ -110,7 +110,7 @@ servIo.on("connection", function (socket) {
 });
 // end
 
-app.get("/", (req, res) => {
+app.get("//api/sockets", (req, res) => {
   res.sendFile("./index.html", { root: __dirname });
 });
 

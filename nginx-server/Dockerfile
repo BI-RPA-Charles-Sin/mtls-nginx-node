@@ -1,3 +1,4 @@
+# 这里的内容不需要修改
 FROM nginx:alpine
  
 COPY proxy.conf /etc/nginx/nginx.conf

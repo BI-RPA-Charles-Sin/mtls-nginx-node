@@ -7,8 +7,16 @@ const { io } = require("socket.io-client");
 //   path: "/api/sockets",
 // });
 
-const socket = io("http://34.92.128.241:8081", {
+// load balancing
+// 34.117.123.79:80 
+// vm 
+// 34.92.128.241
+// domain
+// https://eliveplay.com/
+
+const socket = io("https://eliveplay.com", {
   path: "/api/sockets",
+  port: "80"
 });
 
 socket.on("connect", () => {

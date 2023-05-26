@@ -1,3 +1,4 @@
+# 这里是放 python 的设定，下面的内容换成 python 的设定就好
 FROM node:14
 
 # Create app directory

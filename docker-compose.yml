@@ -1,3 +1,4 @@
+# 这里的设定只需要设定你的服务 port 号码，nginx 设定对外的 port 号码
 version: "3"
 
 services:
