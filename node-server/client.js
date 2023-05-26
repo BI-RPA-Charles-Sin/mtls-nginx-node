@@ -15,7 +15,7 @@ const { io } = require("socket.io-client");
 // https://eliveplay.com/
 
 const socket = io("https://eliveplay.com", {
-  path: "/api/sockets",
+  path: "",
   port: "80"
 });
 
