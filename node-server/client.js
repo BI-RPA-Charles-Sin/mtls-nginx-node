@@ -14,8 +14,8 @@ const { io } = require("socket.io-client");
 // domain
 // https://eliveplay.com/
 
-const socket = io("https://eliveplay.com", {
-  path: "",
+const socket = io("https://34.92.128.241", {
+  path: "/",
   port: "80"
 });
 
